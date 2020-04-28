@@ -159,18 +159,17 @@ exports.deleteUser = (req, res) => {
             let sql = `DELETE FROM user WHERE username='${req.params.username}'`;
             db.query(sql, req.body.matricule, (err, result) => {
                 if (err) res.status(500).json({ message: err });
-                fs.unlink(`./uploads/${users[0].image}`, function (err) {
-                    if (err && err.code == "ENOENT") {
-                        // file doens't exist
-                        console.log("File doesn't exist, won't remove it.");
-                    } else if (err) {
-                        // other errors, e.g. maybe we don't have enough permission
-                        console.log("Error occurred while trying to remove file");
-                    } else {
-                        console.log(`removed`);
-                    }
-                    res.status(200).json({ message: 'user deleted successfully' });
+                fs.unlink(`./uploads/${users[0].image}`, (err) => {
+                    if (err) console.log(err)
                 });
+                fs.unlink(`./uploads/${users[0].imagencin}`, (err) => {
+                    if (err) console.log(err)
+                });
+                fs.unlink(`./uploads/${users[0].bgimage}`, (err) => {
+                    if (err) console.log(err)
+                });
+                res.status(200).json({ message: 'user deleted successfully' });
+
             });
         } else {
             res.status(404).json({ message: 'user not found' })

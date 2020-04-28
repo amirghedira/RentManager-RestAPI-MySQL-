@@ -1,5 +1,5 @@
 const db = require('../config/database')
-
+const fs = require('fs')
 exports.getCars = (req, res) => {
     let sql = "SELECT * FROM voiture";
     db.query(sql, (err, result) => {
@@ -58,28 +58,38 @@ exports.getRentedCars = (req, res) => {
 }
 
 exports.deleteCar = (req, res) => {
-    let sql = `DELETE FROM voiture WHERE matricule='${req.params.mat}'`;
-    db.query(sql, (err, result) => {
-        if (err) res.status(500).json({ message: err });
-        res.status(200).json({ message: 'car successfully deleted' })
-    });
-}
+    let sql = `SELECT * FROM voiture WHERE matricule =${req.params.mat}`;
+    db.query(sql, (err, cars) => {
+        if (err)
+            throw new Error(err)
+        let sql2 = `DELETE FROM voiture WHERE matricule='${req.params.mat}'`;
+        db.query(sql2, (err, result) => {
+            if (err) throw new Error(err)
 
-exports.freeCar = (req, res) => {
-    let sql = `UPDATE voiture SET etat='L' WHERE matricule = '${req.params.mat}'`;
-    db.query(sql, (err, result) => {
-        if (err) res.status(500).json({ message: err });
-        res.status(200).json({ message: 'car successully updated' })
-    });
-}
+            fs.unlink(`./uploads/${cars[0].image}`, (err) => {
+                if (err) console.log(err)
+            });
 
-exports.getCarHistory = (req, res) => {
-    let sql = `SELECT C.ncin,C.nom,C.prenom,C.num_tel,C.image,C.imagencin,L.date,L.prix,L.duree
+            res.status(200).json({ message: 'car successfully deleted' })
+        });
+    })
+
+
+    exports.freeCar = (req, res) => {
+        let sql = `UPDATE voiture SET etat='L' WHERE matricule = '${req.params.mat}'`;
+        db.query(sql, (err, result) => {
+            if (err) res.status(500).json({ message: err });
+            res.status(200).json({ message: 'car successully updated' })
+        });
+    }
+
+    exports.getCarHistory = (req, res) => {
+        let sql = `SELECT C.ncin,C.nom,C.prenom,C.num_tel,C.image,C.imagencin,L.date,L.prix,L.duree
     FROM client C , location L
     WHERE L.ncin = C.ncin
     AND L.matricule='${req.params.mat}'`;
-    db.query(sql, (err, result) => {
-        if (err) res.status(500).json({ message: err });
-        res.status(200).json({ history: result })
-    });
-}
+        db.query(sql, (err, result) => {
+            if (err) res.status(500).json({ message: err });
+            res.status(200).json({ history: result })
+        });
+    }
