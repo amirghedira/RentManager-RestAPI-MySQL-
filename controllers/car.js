@@ -27,8 +27,9 @@ exports.addCar = (req, res) => {
                 couleur: req.body.couleur,
                 prix: req.body.prix,
                 kilometrage: req.body.kilometrage,
-                etat: req.body.etat,
+                etat: 'L',//libre
                 image: req.file.filename,
+                ncinprop: req.user.ncin
             };
             let sql = "INSERT INTO voiture SET ?";
             db.query(sql, post, (err, result) => {
@@ -58,7 +59,7 @@ exports.getRentedCars = (req, res) => {
 }
 
 exports.deleteCar = (req, res) => {
-    let sql = `SELECT * FROM voiture WHERE matricule =${req.params.mat}`;
+    let sql = `SELECT * FROM voiture WHERE matricule ='${req.params.mat}'`;
     db.query(sql, (err, cars) => {
         if (err)
             throw new Error(err)
@@ -85,9 +86,9 @@ exports.freeCar = (req, res) => {
 }
 
 exports.getCarHistory = (req, res) => {
-    let sql = `SELECT C.ncin,C.nom,C.prenom,C.num_tel,C.image,C.imagencin,L.date,L.prix,L.duree
-    FROM client C , location L
-    WHERE L.ncin = C.ncin
+    let sql = `SELECT U.ncin,U.nom,U.prenom,U.num_tel,U.image,U.imagencin,L.date,L.prix,L.duree
+    FROM user U , location L
+    WHERE L.ncin = U.ncin
     AND L.matricule='${req.params.mat}'`;
     db.query(sql, (err, result) => {
         if (err) res.status(500).json({ message: err });

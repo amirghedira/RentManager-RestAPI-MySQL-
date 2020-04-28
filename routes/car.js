@@ -7,13 +7,14 @@ const checkAuth = require('../middleware/checkAuth')
 
 router.get('/', carController.getCars);
 
-router.get('/:mat', carController.getCar);
 
 router.post('/', checkAuth, upload.single("carimage"), carController.addCar);
 
 router.get('/freecars', carController.getFreeCars);
 
 router.get('/rentedcars', carController.getRentedCars);
+
+router.get('/:mat', carController.getCar);
 
 router.delete('/:mat', checkAuth, carController.deleteCar);
 

@@ -5,11 +5,12 @@ const db = require('../config/database')
 exports.addRent = (req, res) => {
     date = new Date();
     let sqlfetch = "SELECT * FROM voiture WHERE `matricule`= ? and `etat`= 'L' ";
-    db.query(sqlfetch, req.body.matricule, (err, result) => {
+    db.query(sqlfetch, req.body.matricule, (err, cars) => {
         if (err) throw err;
-        if (result.length > 0) {
+        if (cars.length > 0) {
             let post = {
-                ncin: req.body.ncin,
+                ncin: req.user.ncin,
+                ncinprop: cars[0].ncinprop,
                 matricule: req.body.matricule,
                 duree: req.body.duree,
                 prix: 80,
@@ -21,30 +22,8 @@ exports.addRent = (req, res) => {
                 let sqlupdate = "UPDATE `voiture` SET `etat`='O' WHERE `matricule` = ?";
                 db.query(sqlupdate, req.body.matricule, (err, result) => {
                     if (err) throw err;
+                    res.status(200).json({ message: 'rent successfully added' });
 
-                    let sql2 = "SELECT * FROM client WHERE `ncin`=?";
-                    db.query(sql2, req.body.ncin, (err, result) => {
-                        if (err) throw err;
-                        if (result.length == 0) {
-                            let sql3 = "INSERT INTO client SET ?";
-                            let post2 = {
-                                ncin: req.body.ncin,
-                                nom: req.body.nom,
-                                prenom: req.body.prenom,
-                                npermis: req.body.npermis,
-                                adresse: req.body.adresse,
-                                num_tel: req.body.num_tel,
-                                image: req.file.filename,
-                                imagencin: req.body.imagencin,
-                            };
-                            db.query(sql3, post2, (err, result) => {
-                                if (err) throw err;
-                                res.status(200).json({ message: 'rent successfully added' });
-                            });
-                        } else {
-                            res.status(200).json({ message: 'rent successfully added' });
-                        }
-                    });
                 });
             });
 

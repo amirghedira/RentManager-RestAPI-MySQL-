@@ -96,13 +96,13 @@ exports.addUser = (req, res) => {
 
 exports.userLogin = (req, res) => {
     let sql = `SELECT * FROM user WHERE username= '${req.body.username}'`;
-    db.query(sql, (err, result) => {
+    db.query(sql, (err, users) => {
         if (err) res.status(500).json({ message: err });
-        if (result.length == 1) {
-            bcrypt.compare(req.body.password, result[0].password)
+        if (users.length == 1) {
+            bcrypt.compare(req.body.password, users[0].password)
                 .then(result => {
                     if (result) {
-                        const token = jwt.sign({ username: req.body.username }, process.env.JWT_SECRET_KEY)
+                        const token = jwt.sign({ id: users[0].id, username: req.body.username, ncin: users[0].ncin }, process.env.JWT_SECRET_KEY)
                         res.status(200).json({ message: 'successfully logged in', token: token });
                     } else {
                         res.status(400).json({ message: 'login failed' })
