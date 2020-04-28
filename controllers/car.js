@@ -73,23 +73,24 @@ exports.deleteCar = (req, res) => {
             res.status(200).json({ message: 'car successfully deleted' })
         });
     })
+}
 
 
-    exports.freeCar = (req, res) => {
-        let sql = `UPDATE voiture SET etat='L' WHERE matricule = '${req.params.mat}'`;
-        db.query(sql, (err, result) => {
-            if (err) res.status(500).json({ message: err });
-            res.status(200).json({ message: 'car successully updated' })
-        });
-    }
+exports.freeCar = (req, res) => {
+    let sql = `UPDATE voiture SET etat='L' WHERE matricule = '${req.params.mat}'`;
+    db.query(sql, (err, result) => {
+        if (err) res.status(500).json({ message: err });
+        res.status(200).json({ message: 'car successully updated' })
+    });
+}
 
-    exports.getCarHistory = (req, res) => {
-        let sql = `SELECT C.ncin,C.nom,C.prenom,C.num_tel,C.image,C.imagencin,L.date,L.prix,L.duree
+exports.getCarHistory = (req, res) => {
+    let sql = `SELECT C.ncin,C.nom,C.prenom,C.num_tel,C.image,C.imagencin,L.date,L.prix,L.duree
     FROM client C , location L
     WHERE L.ncin = C.ncin
     AND L.matricule='${req.params.mat}'`;
-        db.query(sql, (err, result) => {
-            if (err) res.status(500).json({ message: err });
-            res.status(200).json({ history: result })
-        });
-    }
+    db.query(sql, (err, result) => {
+        if (err) res.status(500).json({ message: err });
+        res.status(200).json({ history: result })
+    });
+}
