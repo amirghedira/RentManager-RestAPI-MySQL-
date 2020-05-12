@@ -32,23 +32,5 @@ app.use('/car', carRoutes);
 app.use('/rent', rentRoutes);
 app.use('/user', userRoutes)
 
-// app.post("/upload", upload.single("file"), (req, res, next) => {
-//     console.log(req.file.filename);
-// });
-// app.get("/delete/:file", (req, res) => {
-//     fs.unlink(`./uploads/${req.params.file}`, function (err) {
-//         if (err && err.code == "ENOENT") {
-//             // file doens't exist
-//             console.log("File doesn't exist, won't remove it.");
-//         } else if (err) {
-//             // other errors, e.g. maybe we don't have enough permission
-//             console.log("Error occurred while trying to remove file");
-//         } else {
-//             console.log(`removed`);
-//         }
-//     });
-//     res.send("");
-// });
-
 
 module.exports = app;
