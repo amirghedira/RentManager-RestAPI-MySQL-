@@ -1,9 +1,12 @@
 # Overview 
  This a small API I started was actually a web service that anyone can access and create an account in it, and then, the client can rent an available car. 
+
 Both clients and managers are included in this API as users.
-After a period, I decided to switch to MongoDB for multiple reasons.
-I wanted to share this version (MySQL), because it's helpful for beginners to understand how MySQL queries work with express and Nodejs. (this API doesn't include all functionality of renting cars, it was just a prototype. You can expend it how you want and even change the context of it to another subject.) 
- #Features / Technologies 
+After a period, I decided to switch to MongoDB for multiple reasons. The other API made with MongoDB database and have the full functionality of a renting service is available [here](https://www.amirghedira.com/project/Karyatn%20Backend/Nodejs%20-%20Express%20-%20MongoDB/60d7487ad7e12a0017340e70).
+
+I wanted to share this version (MySQL), because it's helpful for beginners to understand how MySQL queries work with express and Nodejs. (this API doesn't include all functionality of renting cars, it was just a prototype. You can expend it how you want, and even change the context of it to another subject.) 
+
+# Features / Technologies 
  Well, this small API doesn't include too much functionality, it actually demonstrates the basic way to communicate with MySQL database, retrieving the data, and editing it. 
 The main feature this API have are user authentication and manipulating tokens. Also protecting some routes to be accessed from non-authenticated users. Also manipulating images and saving them in "uploads" folder. Also whenever a car or a user is deleted the images will be deleted too for a better storage management. I will mention the libraries I used below. 
 
