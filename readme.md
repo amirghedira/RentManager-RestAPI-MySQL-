@@ -7,7 +7,7 @@ After a period, I decided to switch to MongoDB for multiple reasons. The other A
 I wanted to share this version (MySQL), because it's helpful for beginners to understand how MySQL queries work with express and Nodejs. (this API doesn't include all functionality of renting cars, it was just a prototype. You can expend it how you want, and even change the context of it to another subject.) 
 
 # Launch the project
-To launch the project, you have to first add a `.env` folder in the root directory that will hold the environment variables of the backend. You can find a `.env.example` folder as reference for the environment variables used.
+To launch the project, you have to first add a `.env` file in the root directory that will hold the environment variables of the backend. You can find a `.env.example` folder as reference for the environment variables used.
 
 After adding a `.env` file, you have to install the NodeJS packages on the backend (the project holds both the frontend under the client folder and the backend in the root directory of the project)
 
