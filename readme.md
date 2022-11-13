@@ -1,10 +1,31 @@
 # Overview 
- This a small API I started was actually a web service that anyone can access and create an account in it, and then, the client can rent an available car. 
+ This is a small API I started was actually a web service that anyone can access and create an account in it, and then, the client can rent an available car. 
 
 Both clients and managers are included in this API as users.
 After a period, I decided to switch to MongoDB for multiple reasons. The other API made with MongoDB database and have the full functionality of a renting service is available [here](https://www.amirghedira.com/project/Karyatn%20Backend/Nodejs%20-%20Express%20-%20MongoDB/60d7487ad7e12a0017340e70).
 
 I wanted to share this version (MySQL), because it's helpful for beginners to understand how MySQL queries work with express and Nodejs. (this API doesn't include all functionality of renting cars, it was just a prototype. You can expend it how you want, and even change the context of it to another subject.) 
+
+# Launch the project
+To launch the project, you have to first add a `.env` folder in the root directory that will hold the environment variables of the backend. You can find a `.env.example` folder as reference for the environment variables used.
+
+After adding a `.env` file, you have to install the NodeJS packages on the backend (the project holds both the frontend under the client folder and the backend in the root directory of the project)
+
+To install the backend Node packages, simply run:
+``` bash
+npm install
+```
+To run the backend server, run:
+``` bash
+npm start
+```
+To run the backend server in development mode, run:
+``` bash
+npm run dev
+```
+Note that the server will listen on port `5000`
+
+
 
 # Features / Technologies 
  Well, this small API doesn't include too much functionality, it actually demonstrates the basic way to communicate with MySQL database, retrieving the data, and editing it. 
