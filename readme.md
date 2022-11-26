@@ -9,6 +9,14 @@ I wanted to share this version (MySQL), because it's helpful for beginners to un
 # Launch the project
 To launch the project, you have to first add a `.env` file in the root directory that will hold the environment variables of the backend. You can find a `.env.example` folder as reference for the environment variables used.
 
+## Using Docker
+Note: Docker must be installed on your machine.
+
+To launch the project, simply run:
+```bash
+docker-compose -f docker-compose-local.yml up --build --force-recreate
+```
+## Manually
 After adding a `.env` file, you have to install the NodeJS packages on the backend
 
 To install the backend Node packages, simply run:
@@ -29,7 +37,7 @@ Note that the server will listen on port `5000`
 
 # Features / Technologies 
  Well, this small API doesn't include too much functionality, it actually demonstrates the basic way to communicate with MySQL database, retrieving the data, and editing it. 
-The main feature this API have are user authentication and manipulating tokens. Also protecting some routes to be accessed from non-authenticated users. Also manipulating images and saving them in "uploads" folder. Also whenever a car or a user is deleted the images will be deleted too for a better storage management. I will mention the libraries I used below. 
+The main feature this API have are user authentication and manipulating tokens. Also protecting some routes to be accessed from non-authenticated users. Additionally, manipulating images and saving them in "uploads" folder. Besides, whenever a car or a user is deleted, the images will be deleted too for a better storage management. I will mention the libraries I used below. 
 
 # Platform & Libraries 
 ```json
@@ -46,7 +54,7 @@ The main feature this API have are user authentication and manipulating tokens. 
 I will begin with the basic packages:
 
 ## nodemon:
- This packages allow you to restart the server whenever you save your code, but also you can create with it environment variables, you can add a file called nodemon.json and you add your environment variables such as your database credential.
+ These packages allow you to restart the server whenever you save your code, but also you can create with it environment variables, you can add a file called nodemon.json and you add your environment variables such as your database credential.
 
 link: [https://www.npmjs.com/package/nodemon](https://www.npmjs.com/package/nodemon)
 ## express: 
@@ -67,7 +75,7 @@ Link: [https://www.npmjs.com/package/jsonwebtoken](https://www.npmjs.com/package
 
 ## multer:
 
-This package is very useful to manipulate files such as saving them deleting them, you can also edit their names before saving them. it's really simple to use and to configure.
+This package is very useful to manipulate files such as saving them deleting them, you can also edit their names before saving them. It's really simple to use and to configure.
 
 Link: [https://www.npmjs.com/package/multer](https://www.npmjs.com/package/multer)
 
@@ -79,8 +87,8 @@ Both of these packages act like a driver between the database and your server.
 Link: [https://www.npmjs.com/package/mysql](https://www.npmjs.com/package/mysql) 
 # What I learned ?
 
- When I first used nodejs I built more API with Mysql, this is not my first API manipulating MySQL databases.
-But you can learn more things from this project, actually its really simple and easy to learn from it.
+ When I first used NodeJS I built more API with MySQL, this is not my first API manipulating MySQL databases.
+But you can learn more things from this project, actually it's really simple and easy to learn from it.
 Also you can expend it how you want. 
 Finally, with your creativity, you can actually build your own rest API 
 based on this model.
